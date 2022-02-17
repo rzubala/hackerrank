@@ -8,7 +8,6 @@ function sockMerchant(n: number, ar: number[]): number {
         let cnt = stats[i] | 0
         stats[i] = cnt + 1
     }
-    console.log(stats)
     let pair = 0
     for (let key of Object.keys(stats)) {
         pair += Math.floor(stats[key] / 2)
