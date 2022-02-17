@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "solve": "tsc week$W/$D/solve.ts && node week$W/$D/solve.js && rm week$W/$D/solve.js"
+    "solve": "tsc week$W/$D/solve.ts && node week$W/$D/solve.js && rm week$W/$D/solve.js",
+    "solvecat": "tsc week$W/$D/solve.ts && cat week$W/$D/data | node week$W/$D/solve.js && rm week$W/$D/solve.js"
   },
   "author": "",
   "license": "ISC",
