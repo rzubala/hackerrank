@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts",
     "solve": "tsc --target es2021 week$W/$D/solve.ts && node week$W/$D/solve.js && rm week$W/$D/solve.js",
-    "solvecat": "tsc --target es2021 week$W/$D/solve.ts && cat week$W/$D/data | node week$W/$D/solve.js && rm week$W/$D/solve.js"
+    "solvecat": "tsc --target es2021 week$W/$D/solve.ts common/types.ts && cat week$W/$D/data | node week$W/$D/solve.js && rm week$W/$D/solve.js"
   },
   "author": "",
   "license": "ISC",

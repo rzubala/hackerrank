@@ -1,5 +1,7 @@
 'use strict';
 
+import { ListNode } from '../../common/types.js'
+
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
 let inputString: string = '';
@@ -19,20 +21,9 @@ function readLine(): string {
     return inputLines[currentLine++];
 }
 
-class ListNode<T> {
-    next: ListNode<T> | undefined;
-    private _value: T;    
-    public get value() : T {
-        return this._value
-    }    
-    constructor(value: T) {
-        this._value = value
-    }
-}
-
 type ListNodeNumber = ListNode<number>
 
-const printList = (node: ListNodeNumber | undefined): number[] => {
+const printList = (node: ListNode<number> | undefined): number[] => {
     if (node === undefined) {
         return []
     }
