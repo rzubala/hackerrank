@@ -19,16 +19,23 @@ function readLine(): string {
     return inputLines[currentLine++];
 }
 
-class ListNode {
-    next: ListNode;
-    value: number;
-    constructor(value: number, node: ListNode | null) {
-        this.value = value
-        this.next = node
+class ListNode<T> {
+    next: ListNode<T> | undefined;
+    private _value: T;    
+    public get value() : T {
+        return this._value
+    }    
+    constructor(value: T) {
+        this._value = value
     }
 }
 
-const printList = (node: ListNode): number[] => {
+type ListNodeNumber = ListNode<number>
+
+const printList = (node: ListNodeNumber | undefined): number[] => {
+    if (node === undefined) {
+        return []
+    }
     let values = []
     if (node.next) {
         values.unshift(...printList(node.next))
@@ -37,27 +44,27 @@ const printList = (node: ListNode): number[] => {
     return values
 }
 
-const merge = (node1: ListNode, node2: ListNode) => {
-    let head: ListNode;
+const merge = (node1: ListNodeNumber | undefined, node2: ListNodeNumber | undefined) => {
+    let head: ListNodeNumber | undefined = undefined;
     let last = undefined
     while (node1 || node2) {
-        let cur: ListNode;
+        let cur: ListNodeNumber | undefined = undefined;
         if (node1 && !node2) {
-            cur = new ListNode(node1.value, null)
+            cur = new ListNode(node1.value)
             node1 = node1.next
         } else if (node2 && !node1) {
-            cur = new ListNode(node2.value, null)
+            cur = new ListNode(node2.value)
             node2 = node2.next    
-        } else {
+        } else if (node1 && node2){
             if (node1.value > node2.value) {
-                cur = new ListNode(node2.value, null)
+                cur = new ListNode(node2.value)
                 node2 = node2.next    
             } else {
-                cur = new ListNode(node1.value, null)
+                cur = new ListNode(node1.value)
                 node1 = node1.next    
             }
         }
-        if (!head) {
+        if (!head && cur) {
             head = cur
         }
         if (last) {
@@ -86,7 +93,7 @@ function main() {
         let head2 = undefined
         let last = undefined
         for (let i=1;i<list1Size+1;i++) {
-            const tmp = new ListNode(data[i], null)
+            const tmp = new ListNode(data[i])
             if (!head1) {
                 head1 = tmp
             }
@@ -97,7 +104,7 @@ function main() {
         }
         last = undefined
         for (let i=list1Size + 2;i<list1Size + list2Size + 2;i++) {
-            const tmp = new ListNode(data[i], null)
+            const tmp = new ListNode(data[i])
             if (!head2) {
                 head2 = tmp
             }
