@@ -20,22 +20,35 @@ function readLine(): string {
 }
 
 class Queue {
-    _data: number[]
+    _dataIn: number[]
+    _dataOut: number[]
 
     constructor() {
-        this._data = []
+        this._dataIn = []
+        this._dataOut = []
     }
 
     enqueue = (data: number): void => {
-        this._data.push(data)
+        this._dataIn.push(data)
     }
 
     dequeue = (): number => {
-        return this._data.shift()
+        this.populate()
+        return this._dataOut.pop()
+    }
+
+    populate = () => {
+        if (this._dataOut.length !== 0) {
+            return
+        }
+        while (this._dataIn.length > 0) {
+            this._dataOut.push(this._dataIn.pop())
+        }
     }
 
     print = (): void => {
-        console.log(this._data[0])
+        this.populate()
+        console.log(this._dataOut[this._dataOut.length - 1])
     }
 }
 
