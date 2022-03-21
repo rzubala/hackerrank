@@ -58,6 +58,13 @@ const printPreOrderTree = (node: TreeNode<number>) => {
     }
 }
 
+const getHeight = (node: TreeNode<number> | undefined, lvl: number): number => {
+    if (!node) {
+        return lvl - 1
+    }
+    return Math.max(getHeight(node.left, lvl+1), getHeight(node.right, lvl+1))
+}
+
 
 const head = new TreeNode(5)
 addToTree(head, 3)
@@ -69,4 +76,4 @@ addToTree(head, 4)
 addToTree(head, 2)
 addToTree(head, 6)
 
-printPostOrderTree(head)
+console.log(getHeight(head, 0))
